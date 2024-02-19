@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { string } = require("zod");
-mongoose.connect("mongodb+srv://skillify:8HBg68st@cluster0.lnrxjjn.mongodb.net/Skillify");
+const {config} = require("dotenv");
+config();
+mongoose.connect(process.env.DATABASE_CONNECTION);
 
 const UserSchema = new mongoose.Schema({
     username: String,
