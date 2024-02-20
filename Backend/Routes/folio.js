@@ -50,7 +50,7 @@ router.post("/create", async (req, res)=>{
         })
     }
     const specificFolioId = Math.round(Math.random()*10000);
-    const folio = await Folio.findOneAndUpdate({userId : userId},
+    await Folio.findOneAndUpdate({userId : userId},
         { 
             $inc : {folioCount : 1},
             $push: {
@@ -67,10 +67,38 @@ router.post("/create", async (req, res)=>{
 })
 
 router.put("/update", (req, res)=>{
-    res.send("hey from folio update");
 })
-router.post("/delete", (req, res)=>{
-    res.send("hey from folio delete");
-})
+
+router.post("/delete", async (req, res) => {
+    const folioId = req.headers.folioid;
+
+    try {
+        const updatedDocument = await Folio.findOneAndUpdate(
+            { "folios.folioId": folioId },
+            {
+                $inc : {folioCount : -1},
+                $pull: {
+                    folios: {
+                        folioId: folioId,
+                    },
+                },
+            },
+            { new: true }
+        );
+
+        if (!updatedDocument) {
+            return res.status(404).json({ message: "Folio not found" });
+        }
+
+        return res.status(200).json({
+            message: "Folio deleted successfully",
+            updatedFolios: updatedDocument.folios,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
 
 module.exports = router;
