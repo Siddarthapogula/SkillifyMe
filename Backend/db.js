@@ -19,7 +19,15 @@ const FolioSchema = new mongoose.Schema({
     folioCount: {
         type: Number,  // Corrected this line
         required: true
-    }
+    },
+    folios : [
+        {
+            folioId :{
+                type : Number
+            },
+            data : {}
+        }
+    ]
 });
 
 const User = mongoose.model("User", UserSchema);

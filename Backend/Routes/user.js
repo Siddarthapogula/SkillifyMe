@@ -15,6 +15,7 @@ const signUpBody = zod.object({
 
 router.post("/signup", async (req, res)=>{
     const {success} = signUpBody.safeParse(req.body);
+    
     if(!success){
         return res.status(411).json({
             msg : "please enter min 6 char of password / correct inputs"
