@@ -62,7 +62,7 @@ router.post("/create", async (req, res)=>{
         }
     );
     return res.status(200).json({
-        msg : "congratulations you created portfolio successfully"
+        msg : "congratulations you created portfolio successfully" 
     })
 })
 
