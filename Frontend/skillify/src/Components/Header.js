@@ -16,7 +16,7 @@ const Header = () => {
   }
   return (
     <div className='flex justify-between w-screen h-[5rem] bg-[#BAD7E9]'>
-        <div className=' p-[1.25rem] ml-[2.5rem] bg-[#EB455F] w-60 '>Logo</div>
+        <div className=' p-[1.25rem] ml-[2.5rem]  bg-[#EB455F] w-60 '>Logo</div>
         <div className=' p-[1.25rem] mr-[2.5rem] bg-[#EB455F] w-[16rem] flex justify-between items-center'>
             {user?.isLogged && <button className=' ml-[1.5rem]  cursor-pointer'><FontAwesomeIcon icon={faSearch}  /></button> }
             <FontAwesomeIcon className=' ml-[2.5rem]  cursor-pointer' icon={faQuestion}/>
@@ -25,9 +25,9 @@ const Header = () => {
              <button className=' mr-[1.5rem]'>Get Started</button>
             </div>
             }
-            {user?.isLogged && <button onClick={()=>{
+            {/* {user?.isLogged && <button onClick={()=>{
               handleSignOut();
-            }}>sign out</button>}
+            }}>sign out</button>} */}
 
             
         </div>

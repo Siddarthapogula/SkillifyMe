@@ -18,6 +18,7 @@ router.post("/signup", async (req, res)=>{
     
     if(!success){
         return res.status(411).json({
+            result : "false",
             msg : "please enter min 6 char of password / correct inputs"
         })
     }
@@ -25,6 +26,7 @@ router.post("/signup", async (req, res)=>{
     const isUserExists = await User.findOne({email : req.body.email});
     if(isUserExists){
         return res.status(411).json({
+            result : "false",
             msg : "email already exists please try another!"
         })
     }
@@ -46,6 +48,7 @@ router.post("/signup", async (req, res)=>{
     }, jwtSecret);
 
     res.json({
+        result : "true",
         msg : "success",
         token
     })
@@ -60,6 +63,7 @@ router.post("/signin", async (req, res)=>{
     const {success} = signInBody.safeParse(req.body);
     if(!success){
         return res.status(411).json({
+            result : "false",
             msg : "Invalid input format(password must be atleast 6 char)"
         })
     }
@@ -70,12 +74,14 @@ router.post("/signin", async (req, res)=>{
     if(user){
         const token = jwt.sign({userId : user._id}, jwtSecret);
         res.json({
+            result : "true",
             msg : "successfully logged in",
             token
         })
         return;
     }
     return res.status(411).json({
+        result : "false",
         msg : "No user found"
     })
 })
@@ -89,6 +95,7 @@ router.put("/update", authenticateUser, async (req, res) => {
     
     if (!success) {
         return res.status(411).json({
+            result : "false",
             msg: "enter valid input format"
         });
     }
@@ -101,12 +108,14 @@ router.put("/update", authenticateUser, async (req, res) => {
         const user = await User.findByIdAndUpdate(userId1, { password: newPassword });
         console.log(user);
         return res.json({
+            result : "true ",
             msg: "password updated successfully"
         });
     } catch (err) {
         console.error(err);  // Log the error for debugging purposes
         return res.status(500).json({
-            msg: "something went wrong"
+            result : "false",
+            msg: "no user found"
         });
     }
 });

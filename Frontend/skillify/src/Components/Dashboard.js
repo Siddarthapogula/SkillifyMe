@@ -5,7 +5,6 @@ import Header from './Header';
 import Footer from './Footer'
 const Dashboard = () => {
   const user = useSelector(state => state.user);
-  
   const navigate = useNavigate();
   useEffect(()=>{
     if(user?.isLogged){
@@ -25,8 +24,13 @@ const Dashboard = () => {
             PORTFOLIOS
           </div>
           <div className=' w-8/12 h-[28rem] bg-slate-400'>
-              <h1>Hello {user?.userInfo?.username}..</h1>
-              <h1>wellcome to skillify</h1>
+              <h1>Hello {user?.userInfo}..</h1>
+              <h1>wellcome to skillifyMe</h1>
+              <button className=' bg-[#2A3467] p-2 font-bold text-white'
+              onClick={()=>{
+                navigate("/folio");
+              }}
+              >Get Started</button>
           </div>
         </div>
         {/* testimonials or duplicate portfolios */}

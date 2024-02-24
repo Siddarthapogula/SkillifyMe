@@ -16,11 +16,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("called");
     const storedUser = localStorage.getItem('user');
     const storedToken = localStorage.getItem('token');
   
-    // Check if there is user information in localStorage and the user is logged in
     if (storedUser && storedToken) {
       dispatch(addUserInfo(JSON.parse(storedUser)));
       dispatch(addUserToken(storedToken));
