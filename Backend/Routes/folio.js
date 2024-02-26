@@ -4,44 +4,47 @@ const { Folio, User } = require("../db");
 const router = express.Router();
 
 const folioBody =zod.object({
-    name : zod.string(),
-    proficientSkill : zod.string(),
-    studies : zod.object({
-        higherEducation : zod.string(),
-        secondaryEducation : zod.string(),
-        primaryEducation : zod.string()
+    achievements : zod.string(),
+    contactDetails : zod.object({
+        phoneNo : zod.string(),
+        email : zod.string().email()
     }),
-    techStack : zod.array(zod.string()),
-    projects : zod.array(zod.object({
-        projectName : zod.string(),
-        projectLink : zod.string(),
-        projectDescription : zod.string(),
-        projectTechStack : zod.array(zod.string()),
-    })),
+    description : zod.string(),
     jobExperience : zod.array(zod.object({
+        companyName : zod.string(),
         jobRole : zod.string(),
         jobDuration : zod.string(),
         jobDescription : zod.string(),
+        stillWorking  : zod.boolean(),
         techStackUsed : zod.array(zod.string()),
     })),
-    services : zod.array(zod.string()),
-    achievements : zod.array(zod.string()),
-    resumeDrive : zod.string(zod.string()),
-    description : zod.string(zod.string()),
     links : zod.object({
         linkedin : zod.string(),
         github : zod.string(),
         instagram : zod.string(),
         twitter : zod.string()
     }),
-    contactDetails : zod.object({
-        phoneNo : zod.string(),
-        email : zod.string().email()
-    })
+    name : zod.string(),
+    proficientSkill : zod.string(),
+    projects : zod.array(zod.object({
+        projectName : zod.string(), 
+        projectLink : zod.string(),
+        projectDescription : zod.string(),
+        projectTechStack : zod.array(zod.string()),
+    })),
+    resumeDrive : zod.string(),
+    services : zod.string(),
+    studies : zod.object({
+        higherEducation : zod.string(),
+        secondaryEducation : zod.string(),
+        primaryEducation : zod.string()
+    }),
+    techStack : zod.array(zod.string()),
 })
 
 router.post("/create", async (req, res)=>{
     const newFolioData = req.body;
+    console.log(req);
     const {success} = folioBody.safeParse(req.body);
     const userId = req.headers.userid;
     if(!success){
@@ -64,9 +67,6 @@ router.post("/create", async (req, res)=>{
     return res.status(200).json({
         msg : "congratulations you created portfolio successfully" 
     })
-})
-
-router.put("/update", (req, res)=>{
 })
 
 router.post("/delete", async (req, res) => {

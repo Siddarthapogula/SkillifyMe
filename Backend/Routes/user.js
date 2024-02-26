@@ -5,15 +5,14 @@ const zod = require("zod");
 const jwt = require("jsonwebtoken");
 const {jwtSecret} = require("../config")
 const authenticateUser = require("../MiddleWares/authenticateUser")
-
 const signUpBody = zod.object({
     username : zod.string(),
     email : zod.string(),
     password : zod.string().min(6),
 })
 
-
 router.post("/signup", async (req, res)=>{
+    console.log("reached");
     const {success} = signUpBody.safeParse(req.body);
     
     if(!success){

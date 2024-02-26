@@ -8,7 +8,9 @@ app.use(express.json());
 app.use(cors());
 app.use("/", rootRouter);
 
+
 app.use((err, req, res, next)=>{
+    const body = 
     res.json({
         msg : "something is wrong with our server"
     })
