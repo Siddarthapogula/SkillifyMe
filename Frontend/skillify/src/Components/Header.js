@@ -25,9 +25,9 @@ const Header = () => {
              <button className=' mr-[1.5rem]'>Get Started</button>
             </div>
             }
-            {/* {user?.isLogged && <button onClick={()=>{
+            {user?.isLogged && <button onClick={()=>{
               handleSignOut();
-            }}>sign out</button>} */}
+            }}>sign out</button>} 
 
             
         </div>

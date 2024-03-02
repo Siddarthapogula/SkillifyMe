@@ -15,6 +15,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
+  console.log(user);
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const storedToken = localStorage.getItem('token');

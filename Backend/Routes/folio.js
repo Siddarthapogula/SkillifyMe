@@ -2,6 +2,9 @@ const express = require("express");
 const zod = require("zod");
 const { Folio, User } = require("../db");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const { jwtSecret } = require("../config");
+
 
 const folioBody =zod.object({
     achievements : zod.string(),
@@ -30,7 +33,7 @@ const folioBody =zod.object({
         projectName : zod.string(), 
         projectLink : zod.string(),
         projectDescription : zod.string(),
-        projectTechStack : zod.array(zod.string()),
+        projectTechStack :  zod.array(zod.string()),
     })),
     resumeDrive : zod.string(),
     services : zod.string(),
@@ -42,32 +45,41 @@ const folioBody =zod.object({
     techStack : zod.array(zod.string()),
 })
 
-router.post("/create", async (req, res)=>{
+router.post("/create", async (req, res) => {
     const newFolioData = req.body;
-    console.log(req);
-    const {success} = folioBody.safeParse(req.body);
-    const userId = req.headers.userid;
-    if(!success){
+    const token = req.headers.authorization;
+
+    const {userId} =  jwt.verify(token, jwtSecret);
+    try {
+        folioBody.parse(newFolioData);
+    } catch (error) {
         return res.status(411).json({
-            msg : "please enter required fields"
-        })
+            msg: "Please enter required fields",
+            errors: error.errors, // Send the validation errors for debugging
+        });
     }
-    const specificFolioId = Math.round(Math.random()*10000);
-    await Folio.findOneAndUpdate({userId : userId},
-        { 
-            $inc : {folioCount : 1},
+
+
+    const specificFolioId = Math.round(Math.random() * 10000);
+
+    await Folio.findOneAndUpdate(
+        { userId: userId },
+        {
+            $inc: { folioCount: 1 },
             $push: {
                 folios: {
                     folioId: specificFolioId,
-                    data: newFolioData
-                }
-            }
+                    data: newFolioData,
+                },
+            },
         }
     );
+
     return res.status(200).json({
-        msg : "congratulations you created portfolio successfully" 
-    })
-})
+        msg: "Congratulations, you created a portfolio successfully",
+    });
+});
+
 
 router.post("/delete", async (req, res) => {
     const folioId = req.headers.folioid;

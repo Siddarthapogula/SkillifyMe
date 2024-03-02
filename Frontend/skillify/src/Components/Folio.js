@@ -3,12 +3,14 @@ import Header from './Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { addUserInfo, addUserToken, adduser } from '../store/userSlice';
 import { addProject, addWorkExperience} from '../store/folioSlice';
-
+import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faTwitter, faInstagram, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { roles, skills, technologies } from '../utils';
+import { useNavigate } from 'react-router-dom';
 
 const Folio = () => {
+const navigate = useNavigate();
 const user = useSelector((store)=>store.user);
 const dispatch = useDispatch();
 const folio = useSelector(store => store.folio);
@@ -18,7 +20,7 @@ const jobExperience = folio?.workExperience
 
 // here creating the folio
 
-function handleCreateFolio(){
+async function handleCreateFolio(){
 
   const folioBody = {
     achievements : achievements.current?.value,
@@ -35,7 +37,7 @@ function handleCreateFolio(){
       twitter : twitterLink.current?.value
      },
      name : userName.current?.value,
-     proficientSKill : selectedRole,
+     proficientSkill : selectedRole,
      projects : projects,
      resumeDrive : resumeDriveLink.current?.value,
      services : services.current?.value,
@@ -46,6 +48,14 @@ function handleCreateFolio(){
     },
     techStack : skillSet,
   }
+
+  
+  const headers = {
+    headers: {
+      Authorization: user.token,
+    },
+  };
+  const result = await axios.post("http://localhost:3000/folio/create", folioBody, headers );
 
   setSelectedRole(""); 
   setSkills([]);
@@ -63,7 +73,7 @@ function handleCreateFolio(){
   gitHubLink.current.value = null;
   linkedinLink.current.value = null;
   twitterLink.current.value = null;
-
+  navigate("/");
 }
 
   // here about section 
