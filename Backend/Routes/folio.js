@@ -80,6 +80,23 @@ router.post("/create", async (req, res) => {
     });
 });
 
+router.get("/all", async (req, res) => {
+    const token = req.headers.authorization;
+    let userId, folios;
+
+    try {
+        const decoded = jwt.verify(token, jwtSecret);
+        userId = decoded?.userId;
+        folios = await Folio.find({ userId });
+    } catch (e) {
+        console.error('Error fetching folios:', e);
+        return res.json({ error: 'Internal Server Error' });
+    }
+
+    res.json({
+        folios,
+    });
+});
 
 router.post("/delete", async (req, res) => {
     const folioId = req.headers.folioid;

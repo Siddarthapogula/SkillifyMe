@@ -3,6 +3,8 @@ import {useSelector } from 'react-redux'
 import {useNavigate} from "react-router-dom"
 import Header from './Header';
 import Footer from './Footer'
+import PortFolio from './PortFolio';
+
 const Dashboard = () => {
   const user = useSelector(state => state.user);
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ const Dashboard = () => {
         {/* on landing seeing ka div */}
         <div className=' w-screen flex gap-[3rem] p-[3rem]'>
           <div className=' w-4/12 h-[28rem] bg-slate-400'>
-            PORTFOLIOS
+          <PortFolio/>
           </div>
           <div className=' w-8/12 h-[28rem] bg-slate-400'>
               <h1>Hello {user?.userInfo}..</h1>
