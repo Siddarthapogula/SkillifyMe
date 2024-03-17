@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { string } = require("zod");
 const {config} = require("dotenv");
 config();
 mongoose.connect(process.env.DATABASE_CONNECTION);

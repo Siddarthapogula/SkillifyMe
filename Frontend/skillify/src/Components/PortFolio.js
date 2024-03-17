@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 
 const PortFolio = () => {
@@ -28,10 +29,10 @@ const PortFolio = () => {
     }, [user.token]);
     
   return (
-    <div>
+    <div className=' '>
         {folios && 
-        folios.map((folio)=><div>{folio?.data?.proficientSkill}</div>)
-      }
+        folios.map((folio)=><Link to={'/Your'} className=' flex' >{folio?.data?.proficientSkill} </Link>)
+        }
     </div>
   )
 }
