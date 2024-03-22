@@ -4,6 +4,7 @@ const { Folio, User } = require("../db");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../config");
+const { route } = require("./user");
 
 
 const folioBody =zod.object({
@@ -60,8 +61,6 @@ router.post("/create", async (req, res) => {
             errors: error.errors, // Send the validation errors for debugging
         });
     }
-
-
     const specificFolioId = Math.round(Math.random() * 10000);
 
     await Folio.findOneAndUpdate(
@@ -81,6 +80,32 @@ router.post("/create", async (req, res) => {
         msg: "Congratulations, you created a portfolio successfully",
     });
 });
+
+router.get("/", async (req, res) => {
+    try {
+        const { id } = req.query;
+
+        const finalFolio = await Folio.findOne({ 'folios._id': id });
+
+        if (finalFolio) {
+            const folio = finalFolio.folios.find(f => f._id == id); 
+            if (folio) {
+                console.log('Folio found:', folio);
+                res.json(folio);
+            } else {
+                console.log('Folio not found');
+                res.status(404).json({ message: 'Folio not found' });
+            }
+        } else {
+            console.log('Document containing folios not found');
+            res.status(404).json({ message: 'Document containing folios not found' });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 router.get("/all", async (req, res) => {
     const token = req.headers.authorization;

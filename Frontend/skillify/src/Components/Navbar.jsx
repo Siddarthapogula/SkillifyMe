@@ -6,12 +6,16 @@ import {
   FaLinkedin,
   FaFacebook,
   FaLinkedinIn,
+  FaInstagram,
+  FaTwitter,
 } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
-import { BsFillPersonLinesFill } from 'react-icons/bs';
+import { BsFillPersonLinesFill, BsInstagram } from 'react-icons/bs';
 import { Link } from 'react-scroll';
 
-const Navbar = () => {
+const Navbar = ({data}) => {
+  const resumeDrive = data?.data.resumeDrive
+  const links = data?.data?.links
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
 
@@ -96,7 +100,7 @@ const Navbar = () => {
           <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px]  hover:ml-[0px] duration-300 bg-blue-600'>
             <a
               className='flex justify-between items-center w-full text-gray-300'
-              href='/'
+              href={`${links?.linkedin}`}
             >
               Linkedin <FaLinkedin size={30} />
             </a>
@@ -104,7 +108,7 @@ const Navbar = () => {
           <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[0px] duration-300 bg-[#333333]'>
             <a
               className='flex justify-between items-center w-full text-gray-300'
-              href='/'
+              href={`${links?.linkedin}`}
             >
               Github <FaGithub size={30} />
             </a>
@@ -112,15 +116,23 @@ const Navbar = () => {
           <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px]  hover:ml-[0px] duration-300 bg-[#6fc2b0]'>
             <a
               className='flex justify-between items-center w-full text-gray-300'
-              href='/'
+              href={`${links?.instagram}`}
             >
-              Email <HiOutlineMail size={30} />
+              Email <FaInstagram size={30} />
+            </a>
+          </li>
+          <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px]  hover:ml-[0px] duration-300 bg-[#000000]'>
+            <a
+              className='flex justify-between items-center w-full text-gray-300'
+              href={`${links?.twitter}`}
+            >
+              Email <FaTwitter size={30} />
             </a>
           </li>
           <li className='w-[160px] h-[60px] flex justify-between items-center ml-[-100px]  hover:ml-[0px] duration-300 bg-[#565f69]'>
             <a
               className='flex justify-between items-center w-full text-gray-300'
-              href='/'
+              href={`${resumeDrive}`}
             >
               Resume <BsFillPersonLinesFill size={30} />
             </a>

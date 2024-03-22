@@ -1,40 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import axios from "axios"
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const PortFolio = () => {
-
-    const [folios, setFolios] = useState([]);
+const Portfolio = () => {
+    const [portfolioList, setPortfolioList] = useState([]);
+    const [id, setId] = useState(null);
     const user = useSelector(store => store.user);
-
     const headers = {
-        authorization : user?.token
-    }
+        authorization: user?.token
+    };
 
     useEffect(() => {
-        async function getFolios() {
+        async function fetchPortfolios() {
             try {
                 const result = await axios.get('http://localhost:3000/folio/all', { headers });
                 
                 if (result?.data?.folios[0]?.folios.length !== 0) {
-                    setFolios(result?.data?.folios[0].folios);
+                    const fetchedId = result?.data?.folios[0]._id;
+                    setId(fetchedId);
+                    
+                    if (fetchedId !== id) {
+                        setPortfolioList(result?.data?.folios[0].folios);
+                    }
                 }
             } catch (error) {
-                console.error('Error fetching folios:', error);
+                // console.error('Error fetching portfolios:', error);
             }
         }
     
-        getFolios();
-    }, [user.token]);
-    
-  return (
-    <div className=' '>
-        {folios && 
-        folios.map((folio)=><Link to={'/Your'} className=' flex' >{folio?.data?.proficientSkill} </Link>)
-        }
-    </div>
-  )
-}
+        fetchPortfolios();
+    }, [user.token, id]);
 
-export default PortFolio
+    
+    return (
+        <div className=''>
+            {portfolioList && 
+            portfolioList.map((portfolio, index) => (
+                <Link key={index}  to={`/portfolio/${portfolio?.data?.name}/${portfolio?._id}`} className='flex'>
+                    {portfolio?.data?.proficientSkill}
+                </Link>
+            ))}
+        </div>
+    );
+};
+
+export default Portfolio;

@@ -4,7 +4,6 @@ import Folio from "../src/Components/Folio"
 import Login from "../src/Components/Login"
 import { Provider } from "react-redux"
 import appStore from "../src/store/appstore"
-import YourCase from "./Components/YourCase"
 import Main from "./Components/Main"
 const appRouter = createBrowserRouter([
   {
@@ -20,7 +19,7 @@ const appRouter = createBrowserRouter([
     element : <Folio/>
   },
   {
-    path : "Your",
+    path : "/portfolio/:name/:id",
     element : <Main/>
   }
 ])
