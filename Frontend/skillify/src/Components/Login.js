@@ -16,7 +16,6 @@ const Login = () => {
   const navigate = useNavigate();
 
 
-  console.log(user);
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const storedToken = localStorage.getItem('token');
@@ -63,7 +62,6 @@ const Login = () => {
       };  
       const user = await axios.post('http://localhost:3000/user/signup', signUpData);
       const data = user.data
-      console.log(data);
     }
   }
   

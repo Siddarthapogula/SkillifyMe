@@ -12,7 +12,6 @@ const signUpBody = zod.object({
 })
 
 router.post("/signup", async (req, res)=>{
-    console.log("reached");
     const {success} = signUpBody.safeParse(req.body);
     
     if(!success){
@@ -101,11 +100,9 @@ router.put("/update", authenticateUser, async (req, res) => {
 
     const decoded = jwt.verify(authorization, jwtSecret);
     const userId1 = decoded.userId;
-    console.log(newPassword);
     try {
         // Use the correct field in the filter, assuming it's "userId"
         const user = await User.findByIdAndUpdate(userId1, { password: newPassword });
-        console.log(user);
         return res.json({
             result : "true ",
             msg: "password updated successfully"
@@ -123,7 +120,6 @@ router.get("/", async (req, res)=>{
     const authorization = req.headers.authorization;
     const decoded = jwt.verify(authorization, jwtSecret);
     const userId1 = decoded.userId;
-    console.log(userId1);
     const user = await User.findOne({_id : userId1});
     const userName = user.username;
     res.json({

@@ -3,7 +3,6 @@ import React from 'react';
 
 const Skills = ({data}) => {
     const {techStack} = data?.data;
-    console.log(techStack)
   return (
     <div name='skills' className='w-full h-screen bg-[#0a192f] text-gray-300'>
       {/* Container */}

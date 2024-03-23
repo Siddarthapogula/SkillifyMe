@@ -59,7 +59,6 @@ async function handleCreateFolio(){
 
   setSelectedRole(""); 
   setSkills([]);
-  console.log(folioBody);
   userName.current.value = null;
   secondaryEducation.current.value = null;
   higherEducation.current.value = null;
@@ -132,7 +131,6 @@ async function handleCreateFolio(){
     if(isProjectOk){
       if(projectName.current?.value === null){
           setIsEmpty(!isEmpty);
-          console.log(isEmpty);
           return;
       }
       const addNewProject = {

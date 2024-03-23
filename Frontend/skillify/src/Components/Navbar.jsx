@@ -40,7 +40,7 @@ const Navbar = ({data}) => {
         </li>
         <li>
           <Link className=' hover:cursor-pointer' to='work' smooth={true} duration={500}>
-            Work
+            Projects
           </Link>
         </li>
         <li>
@@ -83,7 +83,7 @@ const Navbar = ({data}) => {
         <li className='py-6 text-4xl'>
           {' '}
           <Link onClick={handleClick} to='work' smooth={true} duration={500}>
-            Work
+            Projects
           </Link>
         </li>
         <li className='py-6 text-4xl'>

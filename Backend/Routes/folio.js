@@ -49,8 +49,6 @@ const folioBody =zod.object({
 router.post("/create", async (req, res) => {
     const newFolioData = req.body;
     const token = req.headers.authorization;
-    console.log(newFolioData);
-    console.log(token);
 
     const {userId} =  jwt.verify(token, jwtSecret);
     try {

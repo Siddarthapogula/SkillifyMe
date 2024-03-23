@@ -3,10 +3,11 @@ import Navbar from './Navbar'
 import Home from './Home'
 import About from './About'
 import Skills from './Skills'
-import Work from './Work'
+import Projects from './Projects'
 import Contact from './Contact'
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
+import WorkExperience from './WorkExperience'
 const Main = () => {
 
   const {id, name} = useParams();
@@ -30,7 +31,8 @@ const Main = () => {
           <Home   data = {folio} />
           <About data = {folio} />
           <Skills data = {folio} />
-          <Work data = {folio} />
+          <WorkExperience data = {folio} />
+          <Projects data = {folio} />
           <Contact data = {folio} />
         </div>
         )
