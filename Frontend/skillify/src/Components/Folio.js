@@ -256,13 +256,13 @@ async function handleCreateFolio(){
   return (
     <>
       <Header/>
-      <div className=' bg-[#FBFFE7] w-screen h-full'>
+      <div className=' bg-[#FBFFE7]   w-screen h-full'>
         {/* top level div */}
         <div className=' py-[2rem]'>
         {/* 1st section i.e about user */}
 
-        <div className=' flex justify-center '>
-        <div className='flex justify-center  w-10/12 h-[30%] '>
+        <div className=' flex justify-center  '>
+        <div className='flex justify-center   w-10/12 h-[30%] '>
           <div className=' w-[30%]  bg-[#2A3467] opacity-70'>
             <div className=' pl-3 pt-3'>
             <div className=' text-white font-[400] text-lg'>About</div>
