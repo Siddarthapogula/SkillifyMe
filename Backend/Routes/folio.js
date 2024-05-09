@@ -88,14 +88,11 @@ router.get("/", async (req, res) => {
         if (finalFolio) {
             const folio = finalFolio.folios.find(f => f._id == id); 
             if (folio) {
-                console.log('Folio found:', folio);
                 res.json(folio);
             } else {
-                console.log('Folio not found');
                 res.status(404).json({ message: 'Folio not found' });
             }
         } else {
-            console.log('Document containing folios not found');
             res.status(404).json({ message: 'Document containing folios not found' });
         }
     } catch (error) {
