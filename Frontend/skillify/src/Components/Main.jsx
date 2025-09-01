@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios'
 import WorkExperience from './WorkExperience'
 const Main = () => {
-
   const {id, name} = useParams();
   const [folio, setFolio] = useState(null);
   
