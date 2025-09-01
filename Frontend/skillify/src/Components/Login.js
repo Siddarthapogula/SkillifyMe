@@ -3,7 +3,7 @@ import Header from "./Header";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserInfo, addUserToken, adduser } from "../store/userSlice";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const user = useSelector((state) => state.user);
@@ -46,6 +46,7 @@ const Login = () => {
         dispatch(addUserInfo(signInData?.username));
         dispatch(addUserToken(data?.token));
         dispatch(adduser());
+        console.log(data)
         localStorage.setItem("user", JSON.stringify(signInData.username));
         localStorage.setItem("token", data?.token);
         navigate("/");
@@ -60,7 +61,7 @@ const Login = () => {
         "http://localhost:3000/user/signup",
         signUpData
       );
-      const data = user.data;
+      alert('signup success')
     }
   }
 

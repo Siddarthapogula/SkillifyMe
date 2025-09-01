@@ -9,7 +9,7 @@ const appRouter = createBrowserRouter([
   {
     path : "/",
     element : <Dashboard/>
-  }, 
+  },
   {
     path : "/login", 
     element : <Login/>

@@ -55,8 +55,11 @@ async function handleCreateFolio(){
       Authorization: user.token,
     },
   };
-  const result = await axios.post("http://localhost:3000/folio/create", folioBody, headers );
-
+try{
+  await axios.post("http://localhost:3000/folio/create", folioBody, headers );
+}catch(e){
+  alert(e?.message);
+}
   setSelectedRole(""); 
   setSkills([]);
   userName.current.value = null;
