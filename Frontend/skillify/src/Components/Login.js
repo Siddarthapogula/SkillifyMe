@@ -58,7 +58,7 @@ const Login = () => {
         password: password.current.value,
       };
       const user = await axios.post(
-        "http://localhost:3000/user/signup",
+        `${BACKEND_BASE_URL}/user/signup`,
         signUpData
       );
       alert('signup success')

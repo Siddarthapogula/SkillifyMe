@@ -15,7 +15,7 @@ const Main = () => {
   
   useEffect(()=>{
     async function getFolio(){
-        const response = await axios.get(`http://localhost:3000/folio/?name=${name}&id=${id}`);
+        const response = await axios.get(`${BACKEND_BASE_URL}/folio/?name=${name}&id=${id}`);
         const result = response?.data;
         setFolio(result);
     }
